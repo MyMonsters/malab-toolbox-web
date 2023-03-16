@@ -95,9 +95,3 @@ vue-admin-perfect
 ├─ tsconfig.json          # typescript 全局配置
 └─ vite.config.ts         # vite 配置
 ```
-
-### 微信交流群
-
-|                       微信二维码                       |
-| :----------------------------------------------------: |
-| <img src="http://182.61.5.190:8889/we.png" width=170/> |

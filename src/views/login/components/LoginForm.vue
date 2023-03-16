@@ -99,7 +99,6 @@
           await router.push({
             path: '/',
           })
-
           loginloading.value = false
         }, 2000)
       } else {

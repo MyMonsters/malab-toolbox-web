@@ -30,7 +30,7 @@ router.beforeEach(async (to, from, next) => {
       try {
         const PermissionStore = usePermissionStore()
         // 路由添加进去了没有及时更新 需要重新进去一次拦截
-        console.log('dsda')
+        console.log(PermissionStore.routes.length)
         if (!PermissionStore.routes.length) {
           // 获取权限列表进行接口访问 因为这里页面要切换权限
           const accessRoutes = await PermissionStore.generateRoutes(UserStore.roles)
@@ -45,7 +45,9 @@ router.beforeEach(async (to, from, next) => {
       }
     }
   } else {
+    console.log(UserStore.token)
     if (whiteList.indexOf(to.path) !== -1) {
+      console.log('白名单')
       next()
     } else {
       next(`/login?redirect=${to.path}`)
