@@ -44,7 +44,7 @@
                     ><count-to
                       :start-val="0"
                       :end-val="pv"
-                      :duration="2000"
+                      :duration="1000"
                       :autoplay="true"
                     ></count-to
                   ></div>

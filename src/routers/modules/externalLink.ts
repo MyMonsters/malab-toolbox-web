@@ -2,10 +2,10 @@ import Layout from '@/layout/index.vue'
 
 const externalLink = [
   {
-    path: '/external-link',
+    path: '/chatgpt',
     component: Layout,
-    redirect: '/external-link/wechat',
-    name: 'external-link',
+    redirect: '/chatgpt/machat',
+    name: 'chatgpt',
     meta: {
       title: 'chatgpt',
       icon: 'link',
@@ -34,10 +34,16 @@ const externalLink = [
       //   component: () => import('@/views/externalLinks/simple/index.vue'),
       // },
       {
-        path: '/external-link/iframe',
-        component: () => import('@/views/externalLinks/chatgpt/index.vue'),
-        name: 'iframe',
-        meta: { title: 'chatgpt', icon: 'MenuIcon' },
+        path: '/chatgpt/machat',
+        component: () => import('@/views/chatgpt/Machatgpt'),
+        name: 'Machat',
+        meta: { title: 'Machat', icon: 'MenuIcon' },
+      },
+      {
+        path: '/chatgpt/chatPDF',
+        component: () => import('@/views/chatgpt/chatpdf'),
+        name: 'chatPDF',
+        meta: { title: 'chatPDF', icon: 'MenuIcon' },
       },
     ],
   },

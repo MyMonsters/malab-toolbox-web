@@ -6,7 +6,7 @@ const chartsRouter = [
   {
     path: '/paper',
     component: Layout,
-    redirect: '/chat/index',
+    redirect: '/paper/index',
     name: 'chat',
     meta: {
       title: 'papers',
@@ -14,10 +14,22 @@ const chartsRouter = [
     },
     children: [
       {
-        path: '/chat/index',
-        component: () => import('@/views/papers/index.vue'),
+        path: '/paper/459paper',
+        component: () => import('@/views/papers/459paper'),
+        name: '459paper',
+        meta: { title: '文献部落', icon: 'chat-square' },
+      },
+      {
+        path: '/paper/LetPubs',
+        component: () => import('@/views/papers/LetPubs'),
         name: 'chatBox',
-        meta: { title: 'papers', icon: 'chat-square' },
+        meta: { title: 'LetPubs', icon: 'chat-square' },
+      },
+      {
+        path: '/paper/Zlibrary',
+        component: () => import('@/views/papers/Z-library'),
+        name: 'library',
+        meta: { title: 'Z-library', icon: 'chat-square' },
       },
     ],
   },
