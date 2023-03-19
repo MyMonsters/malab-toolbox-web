@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
-    <el-row class="row-bg" :gutter="10">
-      <el-col :xs="24" :sm="12" :lg="8">
+    <el-row class="row-bg" :gutter="20">
+      <el-col class="mycol" :xs="24" :sm="12" :lg="8">
         <el-card class="box-card" style="height: 100%">
           <!-- <el-image
             class="wechat"
@@ -10,7 +10,7 @@
             style="max-width: 200px"
             :data-resid="Date.now()"
           /> -->
-          <div class="personal">
+          <div class="personal" style="height: 100%">
             <div>
               <el-avatar :size="50" :src="AvatarLogo" />
             </div>
@@ -22,16 +22,11 @@
             </div>
 
             <el-divider></el-divider>
-            <div style="margin-bottom: 15px"
-              ><h5
-                >如果对你有帮助的话，可以麻烦点一颗 Star、Fork、Watch!
-                你的鼓励是我继续优化的动力~~</h5
-              ></div
-            >
+            <div style="margin-bottom: 15px"><h5>需要翻墙的网站：Z-library、chatPDF</h5></div>
           </div>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="12" :lg="16">
+      <el-col class="mycol" :xs="24" :sm="12" :lg="16">
         <el-row class="custom" :gutter="10">
           <el-col :xs="24" :sm="24" :lg="24">
             <el-card style="margin-bottom: 10px">
@@ -94,44 +89,14 @@
             </el-card>
           </el-col> -->
         </el-row>
-        <!-- <el-card class="box-card"> -->
-        <!-- <template #header>
-            <div class="card-header">
-              <span>系列开源产品</span>
-            </div>
-          </template>
-          <div style="display: flex">
-            <el-card
-              style="flex: 1; margin-right: 20px; cursor: pointer"
-              class="card-item"
-              @click="goTo('https://ext.dcloud.net.cn/plugin?id=7511')"
-            >
-              <div style="color: white; margin-bottom: 10px"><h3>zb-table</h3></div>
-              <div style="font-size: 12px; color: white"
-                >uniapp 表格组件
-                支持固定表头和首列、上拉加载更多、及固定多列，表格自适应内容，排序，多选checkbox、可点击删除，编辑、合计功能，兼容多端</div
-              >
-            </el-card>
-            <el-card
-              style="flex: 1; cursor: pointer"
-              class="card-item"
-              @click="goTo('https://github.com/zouzhibin/vue-admin-perfect')"
-            >
-              <div style="color: white; margin-bottom: 10px"><h3>vue-admin-perfect</h3></div>
-              <div style="font-size: 12px; color: white"
-                >系统基于vue3+vuex+ element-plus+ts后台管理系统</div
-              >
-            </el-card>
-          </div> -->
-        <!-- </el-card> -->
-        <el-card class="box-card">
+        <el-card class="box-card" style="height: 100%">
           <template #header>
             <div class="card-header">
               <span>用户活跃量</span>
             </div>
           </template>
           <div>
-            <bar-charts height="300px" width="100%" id="bar1"></bar-charts>
+            <bar-charts height="800px" width="100%" id="bar1"></bar-charts>
           </div>
         </el-card>
       </el-col>

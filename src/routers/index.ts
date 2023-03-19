@@ -11,22 +11,14 @@ interface extendRoute {
   hidden?: boolean
 }
 //
-import tableRouter from './modules/table'
-import dataScreenRouter from './modules/dataScreen'
-import excelRouter from './modules/excel'
-import nestedRouter from './modules/nested'
-import systemRouter from './modules/system'
-import echartsRouter from './modules/echarts'
-import chatRouter from './modules/chat'
-import othersRouter from './modules/other'
-import externalLink from './modules/externalLink'
-import formRouter from './modules/form'
-import functionPageRouter from './modules/functionPage'
+import pointRouter from './modules/point'
+import chatgptRouter from './modules/chatgpt'
 import paperRouter from './modules/papers'
 // 异步组件
 export const asyncRoutes = [
-  ...externalLink,
+  ...chatgptRouter,
   ...paperRouter,
+  ...pointRouter,
   // ...dataScreenRouter,
   // ...echartsRouter,
   // ...tableRouter,

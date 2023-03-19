@@ -5,7 +5,7 @@ import { useUserStore } from '@/store/modules/user'
 const service = axios.create({
   // 默认请求地址，根据环境的不同可在.env 文件中进行修改
   // baseURL: import.meta.env.VUE_APP_BASE_API,
-  baseURL: 'http://localhost:1004',
+  baseURL: 'http://1.14.92.14:1004',
   // 设置接口访问超时时间
   timeout: 3000000, // request timeout，
   // 跨域时候允许携带凭证

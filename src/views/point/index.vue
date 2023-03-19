@@ -1,31 +1,48 @@
 <template>
-  <div :id="id" :class="className" :style="{ height: height, width: width }" />
+  <div style="width: 100%; height: 100%">
+    <el-button class="btn" text @click="dialogVisible = true" size="large"> 编辑point </el-button>
+
+    <el-dialog v-model="dialogVisible" title="Point" width="30%">
+      <el-alert title="point数据中的color优先" type="success" />
+      <div>Point数据：<el-input autosize v-model="point" type="textarea" /></div>
+      <div>点的颜色：<el-color-picker v-model="ScatterColor" show-alpha /></div>
+      <div>地图背景：<el-color-picker v-model="AreaColor" show-alpha /></div>
+      <div>背景：<el-color-picker v-model="bgColor" show-alpha /></div>
+      <div>点的大小：<el-input v-model="symbolSize" /></div>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button type="primary" @click="changePoint"> 确认 </el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <div :id="id" :style="{ height: height, width: width }"> </div>
+  </div>
 </template>
 <script lang="ts" setup>
   import worldJSON from '@/assets/world/world.json'
   import axios from 'axios'
   import * as echarts from 'echarts'
   import { EChartsType } from 'echarts/core'
-  import { onMounted, reactive, ref } from 'vue'
+  import { onMounted, reactive, ref, computed } from 'vue'
   import { MapChart } from 'echarts/charts'
+  import { ElColorPicker, ElNotification } from 'element-plus'
   import { useUserStore } from '@/store/modules/user'
+  import { usePointStore } from '@/store/modules/point'
+  import config from './config'
 
   echarts.use([MapChart])
   // 必须在使用 use 方法注册了 MapChart 后才能使用 registerMap 注册地图
   echarts.registerMap('world', worldJSON)
-  const userStore = useUserStore()
+  const { point, ScatterColor, bgColor, AreaColor, symbolSize } = config
   let props = defineProps({
-    className: {
-      type: String,
-      default: 'chart',
-    },
     config: {
       type: Object,
       default: () => {},
     },
     id: {
       type: String,
-      default: 'chart',
+      default: 'point',
     },
     width: {
       type: String,
@@ -36,22 +53,30 @@
       default: '100%',
     },
   })
-  let point = reactive({ list: [] })
-  let pv = ref(null)
+  const dialogVisible = ref(false)
+  // let point = ref(pointStore.getPoint())
   let chart: EChartsType
+  const changePoint = () => {
+    initChart()
+    dialogVisible.value = false
+  }
+
   const initChart = () => {
-    console.log(point.list, pv)
     let chart = echarts.init(document.getElementById(props.id))
-    const series = point.list.map((item) => {
+    const pointArr = point.value.length === 0 ? [] : JSON.parse(point.value)
+    console.log('arr', pointArr)
+    const series = pointArr.map((item) => {
       return {
         type: 'scatter',
         coordinateSystem: 'geo',
         // blendMode: 'difference',
-        symbolSize: 7, // 点位大小
+
+        symbolSize: symbolSize.value, // 点位大小
         itemStyle: {
           // color: '#ce6a73', // 各个点位的颜色设置
           // color: '#9a5562',
-          color: '#1f77b6',
+          // color: '#1f77b6',
+          color: item.color ? item.color : ScatterColor.value,
           opacity: 1, // 透明度
           borderWidth: 1, // 边框宽度
           borderColor: 'rgba(255,255,255,0)', //rgba(180, 31, 107, 0.8)
@@ -69,7 +94,7 @@
             color: '#000',
           },
           formatter: () => {
-            return item.pageview + 'visitors from ' + item.country
+            return item.info
           },
         },
 
@@ -79,7 +104,10 @@
 
     chart.setOption({
       // backgroundColor: 'black',
-      backgroundColor: '#fff',
+      backgroundColor: bgColor.value,
+      legend: {
+        show: true,
+      },
       tooltip: {
         trigger: 'item',
       },
@@ -98,7 +126,8 @@
         itemStyle: {
           normal: {
             // areaColor: '#004981', //地图颜色
-            areaColor: '#fff',
+            // areaColor: '#fff',
+            areaColor: AreaColor.value,
             // areaColor: "black",
             borderColor: 'black',
           },
@@ -112,17 +141,7 @@
     return chart
   }
   onMounted(() => {
-    axios.get('https://www.machao.group/deeptime/getPoint').then((res) => {
-      // sessionStorage.setItem('point', JSON.stringify(res.data.data));
-      point.list = res.data.data
-      initChart()
-      // return Promise.resolve(res.data.data)
-    })
-    axios.get('https://www.machao.group/deeptime/getUserIP').then((res) => {
-      pv.value = res.data.pv
-      userStore.setPV(res.data.pv)
-    })
-    let chart = initChart()
+    chart = initChart()
     window.addEventListener('resize', function () {
       chart && chart.resize()
     })
