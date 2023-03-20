@@ -1,10 +1,16 @@
 <template>
-  <div style="width: 100%; height: 100%">
+  <div style="width: 100%; height: 900px">
     <el-button class="btn" text @click="dialogVisible = true" size="large"> 编辑point </el-button>
 
     <el-dialog v-model="dialogVisible" title="Point" width="30%">
       <el-alert title="point数据中的color优先" type="success" />
-      <div>Point数据：<el-input autosize v-model="point" type="textarea" /></div>
+      <el-collapse>
+        <el-collapse-item>
+          <template #title> 点的数据 </template>
+          <div>Point数据：<el-input autosize v-model="point" type="textarea" /></div>
+        </el-collapse-item>
+      </el-collapse>
+
       <div>点的颜色：<el-color-picker v-model="ScatterColor" show-alpha /></div>
       <div>地图背景：<el-color-picker v-model="AreaColor" show-alpha /></div>
       <div>背景：<el-color-picker v-model="bgColor" show-alpha /></div>
@@ -79,12 +85,12 @@
           color: item.color ? item.color : ScatterColor.value,
           opacity: 1, // 透明度
           borderWidth: 1, // 边框宽度
-          borderColor: 'rgba(255,255,255,0)', //rgba(180, 31, 107, 0.8)
-          borderJoin: 'round',
+          // borderColor: 'rgba(255,255,255,0)', //rgba(180, 31, 107, 0.8)
+          // borderJoin: 'round',
 
-          shadowBlur: 10,
+          // shadowBlur: 10,
           // shadowColor: 'rgba(120, 36, 50, 0.5)',
-          shadowOffsetY: 5,
+          // shadowOffsetY: 5,
         },
         tooltip: {
           backgroundColor: 'rgba(255,255,255, 1)',
@@ -105,6 +111,38 @@
     chart.setOption({
       // backgroundColor: 'black',
       backgroundColor: bgColor.value,
+      animation: false,
+      zoom: 1.1,
+      roam: true,
+      dataZoom: [
+        {
+          type: 'slider',
+          show: true,
+          xAxisIndex: [0],
+          start: 1,
+          end: 35,
+        },
+        {
+          type: 'slider',
+          show: true,
+          yAxisIndex: [0],
+          left: '93%',
+          start: 29,
+          end: 36,
+        },
+        {
+          type: 'inside',
+          xAxisIndex: [0],
+          start: 1,
+          end: 35,
+        },
+        {
+          type: 'inside',
+          yAxisIndex: [0],
+          start: 29,
+          end: 36,
+        },
+      ],
       legend: {
         show: true,
       },
