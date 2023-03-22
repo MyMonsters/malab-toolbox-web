@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="app-container-inner">
-      <iframe src="http://1.14.92.14:1002" frameborder="0" class="full-iframe"></iframe>
+      <iframe src="https://ai.machao.group" frameborder="0" class="full-iframe"></iframe>
     </div>
   </div>
 </template>
